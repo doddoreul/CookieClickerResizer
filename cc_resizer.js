@@ -1,45 +1,61 @@
-// Cookie Clicker CSS Plugin
+// Cookie Clicker CSS Plugin v1.0
 // Compatible with Cookie Clicker Mod Manager
 
-Game.registerMod("CSS Plugin", {
-    init: function() {
-        // Create style element for custom CSS
-        let styleElement = document.getElementById('customCSSPlugin');
-        if (!styleElement) {
-            styleElement = document.createElement('style');
-            styleElement.id = 'customCSSPlugin';
-            document.head.appendChild(styleElement);
-        }
+(function() {
 
-        const customCSS = `
-          #sectionLeft {
-            width: 25%;
-          }
-          .separatorLeft {
-            left: 25%;
-          }
-          #sectionMiddle {
-            left: 25%;
-            right: 285px;
-          }
-          .separatorRight {
-            right: 298px;
-          }
-
-        `;
-
-        // Apply the custom CSS
-        styleElement.textContent = customCSS;
-
-        console.log('CSS Plugin loaded successfully!');
-    },
-
-    save: function() {
-        // No save data needed for CSS modifications
-        return "";
-    },
-
-    load: function(str) {
-        // No load data needed for CSS modifications
+    // Wait for Game to be loaded
+    if (typeof Game === 'undefined' || !Game.ready) {
+        setTimeout(arguments.callee, 100);
+        return;
     }
-});
+
+    // Register the mod
+    Game.registerMod("CSS Plugin", {
+        init: function() {
+            // Create style element for custom CSS
+            let styleElement = document.getElementById('customCSSPlugin');
+            if (!styleElement) {
+                styleElement = document.createElement('style');
+                styleElement.id = 'customCSSPlugin';
+                document.head.appendChild(styleElement);
+            }
+
+            // Your custom CSS goes here
+            const customCSS = `
+                /* Custom layout adjustments */
+                #sectionLeft {
+                    width: 25%;
+                }
+                .separatorLeft {
+                    left: 25%;
+                }
+                #sectionMiddle {
+                    left: 25%;
+                    right: 285px;
+                }
+                .separatorRight {
+                    right: 298px;
+                }
+            `;
+
+            // Apply the custom CSS
+            styleElement.textContent = customCSS;
+
+            // Notification
+            if (typeof Game.Notify !== 'undefined') {
+                Game.Notify('CSS Plugin loaded!', 'Custom styles applied', [16, 5], 3);
+            }
+
+            console.log('CSS Plugin initialized successfully');
+        },
+
+        save: function() {
+            return "";
+        },
+
+        load: function(str) {
+            // No load needed
+        }
+    });
+
+})();
