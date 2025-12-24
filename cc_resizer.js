@@ -1,45 +1,45 @@
 // Cookie Clicker CSS Plugin
-// A blank template for custom CSS modifications
+// Compatible with Cookie Clicker Mod Manager
 
-(function() {
-    'use strict';
+Game.registerMod("CSS Plugin", {
+    init: function() {
+        // Create style element for custom CSS
+        let styleElement = document.getElementById('customCSSPlugin');
+        if (!styleElement) {
+            styleElement = document.createElement('style');
+            styleElement.id = 'customCSSPlugin';
+            document.head.appendChild(styleElement);
+        }
 
-    // Check if Cookie Clicker is loaded
-    if (typeof Game === 'undefined') {
-        console.warn('Cookie Clicker not detected! Make sure you are on the game page.');
-        return;
+        const customCSS = `
+          #sectionLeft {
+            width: 25%;
+          }
+          .separatorLeft {
+            left: 25%;
+          }
+          #sectionMiddle {
+            left: 25%;
+            right: 285px;
+          }
+          .separatorRight {
+            right: 298px;
+          }
+
+        `;
+
+        // Apply the custom CSS
+        styleElement.textContent = customCSS;
+
+        console.log('CSS Plugin loaded successfully!');
+    },
+
+    save: function() {
+        // No save data needed for CSS modifications
+        return "";
+    },
+
+    load: function(str) {
+        // No load data needed for CSS modifications
     }
-
-    // Create style element for custom CSS
-    let styleElement = document.getElementById('customCSSPlugin');
-    if (!styleElement) {
-        styleElement = document.createElement('style');
-        styleElement.id = 'customCSSPlugin';
-        document.head.appendChild(styleElement);
-    }
-
-    // Your custom CSS goes here
-    const customCSS = `
-      #sectionLeft {
-        width: 25%;
-      }
-      .separatorLeft {
-        left: 25%;
-      }
-      #sectionMiddle {
-        left: 25%;
-        right: 285px;
-      }
-      .separatorRight {
-        right: 298px;
-      }
-
-
-    `;
-
-    // Apply the custom CSS
-    styleElement.textContent = customCSS;
-
-    console.log('Plugin loaded successfully!');
-
-})();
+});
