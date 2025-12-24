@@ -52,6 +52,9 @@
                 .storeBulkAmount {
                   width: 45px;
                 }
+                #storeTitle {
+                  width: 224px;
+                }
             `;
 
             // Apply the custom CSS
