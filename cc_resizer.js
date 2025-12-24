@@ -53,7 +53,7 @@
                   width: 45px;
                 }
                 #storeTitle {
-                  width: 224px;
+                  width: 224px !important;
                 }
             `;
 
