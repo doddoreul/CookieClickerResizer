@@ -17,9 +17,22 @@
         styleElement.id = 'customCSSPlugin';
         document.head.appendChild(styleElement);
     }
-    
+
     // Your custom CSS goes here
     const customCSS = `
+      #sectionLeft {
+        width: 25%;
+      }
+      .separatorLeft {
+        left: 25%;
+      }
+      #sectionMiddle {
+        left: 25%;
+        right: 285px;
+      }
+      .separatorRight {
+        right: 298px;
+      }
 
 
     `;
