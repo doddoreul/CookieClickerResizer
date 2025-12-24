@@ -8,7 +8,7 @@ This mod reshapes the cookie clicker interface to fit smaller screens
 
 ## Installation
 
-1. Add raw file to CCMM
+1. Add 'https://doddoreul.github.io/CookieClickerResizer/cc_resizer.js to CCMM'
 
 ## Usage
 
