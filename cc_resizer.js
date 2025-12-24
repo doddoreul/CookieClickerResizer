@@ -36,6 +36,10 @@
                 .separatorRight {
                     right: 298px;
                 }
+                #backgroundLeftCanvas {
+                  width: 100%;
+                  height: 100%;
+                }
             `;
 
             // Apply the custom CSS
