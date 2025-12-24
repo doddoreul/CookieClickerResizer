@@ -31,10 +31,10 @@
                 }
                 #sectionMiddle {
                     left: 25%;
-                    right: 285px;
+                    right: 240px;
                 }
                 .separatorRight {
-                    right: 298px;
+                    right: 240px;
                 }
                 #backgroundLeftCanvas {
                   width: 100% !important;
