@@ -1,4 +1,4 @@
-// Cookie Clicker CSS Plugin v1.0
+// Cookie Clicker Resizer v1.0
 // Compatible with Cookie Clicker Mod Manager
 
 (function() {
@@ -10,7 +10,7 @@
     }
 
     // Register the mod
-    Game.registerMod("CSS Plugin", {
+    Game.registerMod("CC Resizer", {
         init: function() {
             // Create style element for custom CSS
             let styleElement = document.getElementById('customCSSPlugin');
@@ -39,6 +39,18 @@
                 #backgroundLeftCanvas {
                   width: 100% !important;
                   height: 100% !important;
+                }
+                .storeSection {
+                  width: 240px;
+                }
+                .product {
+                  width: 240px;
+                }
+                .storeBulkMode {
+                  width: 240px;
+                }
+                .storeBulkAmount {
+                  width: 45px;
                 }
             `;
 
