@@ -55,6 +55,10 @@
                 #storeTitle {
                   width: 224px !important;
                 }
+
+                #gardenField {
+                  width: 350px !important;
+                }
             `;
 
             // Apply the custom CSS
