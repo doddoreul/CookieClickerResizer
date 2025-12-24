@@ -47,7 +47,7 @@
                   width: 240px;
                 }
                 .storeBulkMode {
-                  width: 240px;
+                  width: 60px;
                 }
                 .storeBulkAmount {
                   width: 45px;
