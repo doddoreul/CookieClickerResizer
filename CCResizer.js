@@ -34,7 +34,7 @@
                     right: 240px;
                 }
                 .separatorRight {
-                    right: 240px;
+                    right: 240px !important;
                 }
                 #backgroundLeftCanvas {
                   width: 100% !important;
