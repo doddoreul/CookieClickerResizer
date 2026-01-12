@@ -24,14 +24,14 @@
             const customCSS = `
                 /* Custom layout adjustments */
                 #sectionLeft {
-                    width: 25%;
+                    width: 25% !important;
                 }
                 .separatorLeft {
-                    left: 25%;
+                    left: 25% !important;
                 }
                 #sectionMiddle {
-                    left: 25%;
-                    right: 240px;
+                    left: 25% !important;
+                    right: 240px !important;
                 }
                 .separatorRight {
                     right: 240px !important;
@@ -41,16 +41,16 @@
                   height: 100% !important;
                 }
                 .storeSection {
-                  width: 240px;
+                  width: 240px !important;
                 }
                 .product {
-                  width: 240px;
+                  width: 240px !important;
                 }
                 .storeBulkMode {
-                  width: 60px;
+                  width: 60px !important;
                 }
                 .storeBulkAmount {
-                  width: 45px;
+                  width: 45px !important;
                 }
                 #storeTitle {
                   width: 224px !important;
