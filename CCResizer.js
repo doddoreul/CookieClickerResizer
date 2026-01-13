@@ -59,6 +59,9 @@
                 #gardenField {
                   width: 350px !important;
                 }
+                 #gardenPanel {
+                   width: 290px !important;
+                 }
             `;
 
             // Apply the custom CSS
