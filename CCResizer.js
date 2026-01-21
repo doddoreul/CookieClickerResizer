@@ -122,6 +122,60 @@
                 Game.Notify('CSS Plugin loaded!', 'Custom styles applied', [16, 5], 3);
             }
 
+            // ================================
+            // Cookie Monster exact number format
+            // ================================
+
+            // Ne pas override si Cookie Monster est déjà chargé
+            if (Game.mods['Cookie Monster']) {
+                console.log('[CC Resizer] Cookie Monster détecté — format natif conservé');
+                return;
+            }
+
+            const CM_SUFFIXES = [
+                '', 'K', 'M', 'B', 'T',
+                'Qa', 'Qi', 'Sx', 'Sp', 'Oc',
+                'No', 'Dc',
+                'Ud', 'Dd', 'Td', 'QaD', 'QiD', 'SxD', 'SpD', 'OcD', 'NoD',
+                'Vg',
+                'UVg', 'DVg', 'TVg', 'QVg'
+            ];
+
+            const originalBeautifyAll = BeautifyAll;
+
+            BeautifyAll = function (value, floats = 2, forced = false) {
+                if (value === Infinity) return '∞';
+                if (isNaN(value)) return '0';
+
+                value = Number(value);
+
+                if (!forced && Math.abs(value) < 1000) {
+                    return originalBeautifyAll(value, floats, forced);
+                }
+
+                let exponent = Math.floor(Math.log10(Math.abs(value)));
+                let tier = Math.floor(exponent / 3);
+
+                if (tier <= 0) {
+                    return originalBeautifyAll(value, floats, forced);
+                }
+
+                if (tier >= CM_SUFFIXES.length) {
+                    return value.toExponential(2);
+                }
+
+                let scale = Math.pow(10, tier * 3);
+                let scaled = value / scale;
+
+                // Cookie Monster : 3 chiffres significatifs
+                let formatted =
+                    scaled >= 100 ? scaled.toFixed(0) :
+                    scaled >= 10  ? scaled.toFixed(1) :
+                                    scaled.toFixed(2);
+
+                return formatted + CM_SUFFIXES[tier];
+            };
+
             console.log('CSS Plugin initialized successfully');
         },
 
