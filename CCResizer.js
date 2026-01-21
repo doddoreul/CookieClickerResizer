@@ -123,12 +123,6 @@
             }
 
 
-            // Si Cookie Monster est chargé, on ne fait rien
-            if (Game.mods['Cookie Monster']) {
-                console.log('[CC Resizer] Cookie Monster détecté — désactivé');
-                return;
-            }
-
             const SUFFIXES = [
                 '', 'K', 'M', 'B', 'T',
                 'Qa', 'Qi', 'Sx', 'Sp', 'Oc',
