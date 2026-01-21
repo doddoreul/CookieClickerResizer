@@ -122,59 +122,66 @@
                 Game.Notify('CSS Plugin loaded!', 'Custom styles applied', [16, 5], 3);
             }
 
-            // ================================
-            // Cookie Monster exact number format
-            // ================================
 
-            // Ne pas override si Cookie Monster est déjà chargé
+            // Si Cookie Monster est chargé, on ne fait rien
             if (Game.mods['Cookie Monster']) {
-                console.log('[CC Resizer] Cookie Monster détecté — format natif conservé');
+                console.log('[CC Resizer] Cookie Monster détecté — désactivé');
                 return;
             }
 
-            const CM_SUFFIXES = [
+            const SUFFIXES = [
                 '', 'K', 'M', 'B', 'T',
                 'Qa', 'Qi', 'Sx', 'Sp', 'Oc',
                 'No', 'Dc',
                 'Ud', 'Dd', 'Td', 'QaD', 'QiD', 'SxD', 'SpD', 'OcD', 'NoD',
-                'Vg',
-                'UVg', 'DVg', 'TVg', 'QVg'
+                'Vg', 'UVg', 'DVg', 'TVg', 'QVg'
             ];
 
-            const originalBeautifyAll = BeautifyAll;
+            const _Beautify = Beautify;
+            const _BeautifyAll = BeautifyAll;
 
-            BeautifyAll = function (value, floats = 2, forced = false) {
+            function CMBeautify(value, floats = 2, forced = false) {
                 if (value === Infinity) return '∞';
                 if (isNaN(value)) return '0';
 
                 value = Number(value);
 
                 if (!forced && Math.abs(value) < 1000) {
-                    return originalBeautifyAll(value, floats, forced);
+                    return _Beautify(value, floats, forced);
                 }
 
                 let exponent = Math.floor(Math.log10(Math.abs(value)));
                 let tier = Math.floor(exponent / 3);
 
                 if (tier <= 0) {
-                    return originalBeautifyAll(value, floats, forced);
+                    return _Beautify(value, floats, forced);
                 }
 
-                if (tier >= CM_SUFFIXES.length) {
+                if (tier >= SUFFIXES.length) {
                     return value.toExponential(2);
                 }
 
                 let scale = Math.pow(10, tier * 3);
                 let scaled = value / scale;
 
-                // Cookie Monster : 3 chiffres significatifs
-                let formatted =
+                // EXACT Cookie Monster logic: 3 chiffres significatifs
+                let out =
                     scaled >= 100 ? scaled.toFixed(0) :
                     scaled >= 10  ? scaled.toFixed(1) :
                                     scaled.toFixed(2);
 
-                return formatted + CM_SUFFIXES[tier];
-            };
+                return out + SUFFIXES[tier];
+            }
+
+            Beautify = CMBeautify;
+            BeautifyAll = CMBeautify;
+
+            Game.Notify(
+                'Notation Cookie Monster',
+                'Réduction des nombres activée',
+                [16, 5],
+                4
+            );
 
             console.log('CSS Plugin initialized successfully');
         },
