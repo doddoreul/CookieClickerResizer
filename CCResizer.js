@@ -92,36 +92,46 @@
                 BeautifyAll = CMFormat;
                 Game.formatNumber = function(value) { return CMFormat(value); };
 
-                // --- Bouton Pop All Wrinklers ---
-                if (!document.getElementById('popAllWrinklersBtn')) {
-                    const btn = document.createElement('button');
-                    btn.id = 'popAllWrinklersBtn';
-                    btn.textContent = 'Pop all Wrinklers';
-                    btn.style.position = 'fixed';
-                    btn.style.left = '10px';
-                    btn.style.bottom = '30px'; // Au-dessus du numéro de version
-                    btn.style.zIndex = '9999';
-                    btn.style.padding = '5px 10px';
-                    btn.style.backgroundColor = '#F5DEB3';
-                    btn.style.border = '1px solid #B8860B';
-                    btn.style.borderRadius = '5px';
-                    btn.style.cursor = 'pointer';
-                    btn.style.fontSize = '14px';
-                    btn.style.fontWeight = 'bold';
-                    btn.style.boxShadow = '1px 1px 3px rgba(0,0,0,0.3)';
+                // --- Pop All Wrinklers btn ---
+                if (!document.getElementById('popAllWrinklersFrame')) {
 
-                    btn.addEventListener('click', () => {
-                        if (Game.wrinklers.length > 0) {
-                            Game.wrinklers.forEach(w => w.hp = 0);
-                            Game.UpdateWrinklers();
-                            Game.Notify('All wrinklers popped!', '', [16, 5], 3);
-                        } else {
-                            Game.Notify('No wrinklers to pop!', '', [16, 5], 3);
-                        }
-                    });
+                    const frame = document.createElement('div');
+                    frame.id = 'popAllWrinklersFrame';
+                    frame.className = 'framed';
 
-                    document.body.appendChild(btn);
+                    frame.style.position = 'fixed';
+                    frame.style.left = '6px';
+                    frame.style.bottom = '30px';
+                    frame.style.zIndex = '10000';
+
+                    frame.style.padding = '4px';
+                    frame.style.boxShadow = 'none';
+                    frame.style.backgroundClip = 'padding-box';
+
+                    const btn = document.createElement('div');
+                    btn.className = 'option titleFont';
+                    btn.textContent = 'Pop all wrinklers';
+
+                    btn.style.whiteSpace = 'nowrap';
+                    btn.style.textAlign = 'center';
+                    btn.style.cursor = 'pointer'; // ← hover “main”
+
+                    btn.onclick = function () {
+                        let popped = false;
+                        Game.wrinklers.forEach(w => {
+                            if (w.hp > 0) {
+                                w.hp = 0;
+                                popped = true;
+                            }
+                        });
+                        Game.UpdateWrinklers();
+
+                    };
+
+                    frame.appendChild(btn);
+                    document.body.appendChild(frame);
                 }
+
 
                 // Notification du plugin
                 if (typeof Game.Notify !== 'undefined') {

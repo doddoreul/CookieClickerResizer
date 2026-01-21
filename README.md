@@ -16,9 +16,11 @@ Nothing to do, enjoy
 
 ## Features
 
-- CSS-only modifications
+- Reduces a few elements width to fit smaller screens
+- Shortens number names (Cookie Monster style)
+- Adds "Pop all Wrinklers" button
 - No game mechanics alteration
--  Lightweight
+- Lightweight
 - No dependencies
 
 ## Compatibility
