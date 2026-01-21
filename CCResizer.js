@@ -121,7 +121,11 @@
             if (typeof Game.Notify !== 'undefined') {
                 Game.Notify('CSS Plugin loaded!', 'Custom styles applied', [16, 5], 3);
             }
-
+        
+            if (Game.mods['Cookie Monster']) {
+                console.log('[CC Resizer] Cookie Monster détecté — désactivé');
+                return;
+            }
 
             const SUFFIXES = [
                 '', 'K', 'M', 'B', 'T',
@@ -131,10 +135,13 @@
                 'Vg', 'UVg', 'DVg', 'TVg', 'QVg'
             ];
 
+            const SPACE = '\u202F'; // espace fine insécable (Cookie Monster)
+
             const _Beautify = Beautify;
             const _BeautifyAll = BeautifyAll;
+            const _formatNumber = Game.formatNumber;
 
-            function CMBeautify(value, floats = 2, forced = false) {
+            function CMFormat(value, floats = 2, forced = false) {
                 if (value === Infinity) return '∞';
                 if (isNaN(value)) return '0';
 
@@ -158,21 +165,25 @@
                 let scale = Math.pow(10, tier * 3);
                 let scaled = value / scale;
 
-                // EXACT Cookie Monster logic: 3 chiffres significatifs
+                // 3 chiffres significatifs (Cookie Monster exact)
                 let out =
                     scaled >= 100 ? scaled.toFixed(0) :
                     scaled >= 10  ? scaled.toFixed(1) :
                                     scaled.toFixed(2);
 
-                return out + SUFFIXES[tier];
+                return out + SPACE + SUFFIXES[tier];
             }
 
-            Beautify = CMBeautify;
-            BeautifyAll = CMBeautify;
+            Beautify = CMFormat;
+            BeautifyAll = CMFormat;
+
+            Game.formatNumber = function (value) {
+                return CMFormat(value);
+            };
 
             Game.Notify(
                 'Notation Cookie Monster',
-                'Réduction des nombres activée',
+                'Abréviations avec espace fine insécable activées',
                 [16, 5],
                 4
             );
