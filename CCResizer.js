@@ -73,22 +73,7 @@
                   'No', 'De', 'UDe', 'DDe', 'TDe',
                   'QaDe', 'QiDe', 'SxDe', 'SpDe', 'ODe',
                   'NDe', 'Vi', 'UVi', 'DVi', 'TVi',
-                  'QaVi', 'QiVi', 'SxVi', 'SpVi', 'OVi',
-                  'NVi', 'Tr', 'UTr', 'DTr', 'TTr',
-                  'QaTr', 'QiTr', 'SxTr', 'SpTr', 'OTr',
-                  'NTr', 'Qaa', 'UQa', 'DQa', 'TQa',
-                  'QaQa', 'QiQa', 'SxQa', 'SpQa', 'OQa',
-                  'NQa', 'Qia', 'UQi', 'DQi', 'TQi',
-                  'QaQi', 'QiQi', 'SxQi', 'SpQi', 'OQi',
-                  'NQi', 'Sxa', 'USx', 'DSx', 'TSx',
-                  'QaSx', 'QiSx', 'SxSx', 'SpSx', 'OSx',
-                  'NSx', 'Spa', 'USp', 'DSp', 'TSp',
-                  'QaSp', 'QiSp', 'SxSp', 'SpSp', 'OSp',
-                  'NSp', 'Oco', 'UOc', 'DOc', 'TOc',
-                  'QaOc', 'QiOc', 'SxOc', 'SpOc', 'OOc',
-                  'NOc', 'Noa', 'UNo', 'DNo', 'TNo',
-                  'QaNo', 'QiNo', 'SxNo', 'SpNo', 'ONo',
-                  'NNo', 'Ct', 'UCt'
+                  'QaVi', 'QiVi', 'SxVi'
                 ];
                 const SPACE = '\u202F';
                 const _Beautify = Beautify;
@@ -150,7 +135,7 @@
                     document.body.appendChild(frame);
                 }
 
-                if (document.getElementById('popAllGCFrame')){
+                if (!document.getElementById('popAllGCFrame')){
                     const frame = document.createElement('div');
                     frame.id = 'popAllGCFrame';
                     frame.className = 'framed';
