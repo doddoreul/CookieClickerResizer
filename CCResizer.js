@@ -68,9 +68,27 @@
 
                 // --- Beautify personnalisé ---
                 const SUFFIXES = [
-                    '', 'K', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No', 'Dc',
-                    'Ud', 'Dd', 'Td', 'QaD', 'QiD', 'SxD', 'SpD', 'OcD', 'NoD',
-                    'Vg', 'UVig', 'DVg', 'TVg', 'QVg'
+                  '', 'K', 'M', 'B', 'T',
+                  'Qa', 'Qi', 'Sx', 'Sp', 'Oc',
+                  'No', 'De', 'UDe', 'DDe', 'TDe',
+                  'QaDe', 'QiDe', 'SxDe', 'SpDe', 'ODe',
+                  'NDe', 'Vi', 'UVi', 'DVi', 'TVi',
+                  'QaVi', 'QiVi', 'SxVi', 'SpVi', 'OVi',
+                  'NVi', 'Tr', 'UTr', 'DTr', 'TTr',
+                  'QaTr', 'QiTr', 'SxTr', 'SpTr', 'OTr',
+                  'NTr', 'Qaa', 'UQa', 'DQa', 'TQa',
+                  'QaQa', 'QiQa', 'SxQa', 'SpQa', 'OQa',
+                  'NQa', 'Qia', 'UQi', 'DQi', 'TQi',
+                  'QaQi', 'QiQi', 'SxQi', 'SpQi', 'OQi',
+                  'NQi', 'Sxa', 'USx', 'DSx', 'TSx',
+                  'QaSx', 'QiSx', 'SxSx', 'SpSx', 'OSx',
+                  'NSx', 'Spa', 'USp', 'DSp', 'TSp',
+                  'QaSp', 'QiSp', 'SxSp', 'SpSp', 'OSp',
+                  'NSp', 'Oco', 'UOc', 'DOc', 'TOc',
+                  'QaOc', 'QiOc', 'SxOc', 'SpOc', 'OOc',
+                  'NOc', 'Noa', 'UNo', 'DNo', 'TNo',
+                  'QaNo', 'QiNo', 'SxNo', 'SpNo', 'ONo',
+                  'NNo', 'Ct', 'UCt'
                 ];
                 const SPACE = '\u202F';
                 const _Beautify = Beautify;
