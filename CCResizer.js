@@ -70,7 +70,7 @@
                 const SUFFIXES = [
                     '', 'K', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No', 'Dc',
                     'Ud', 'Dd', 'Td', 'QaD', 'QiD', 'SxD', 'SpD', 'OcD', 'NoD',
-                    'Vg', 'UVg', 'DVg', 'TVg', 'QVg'
+                    'Vg', 'UVig', 'DVg', 'TVg', 'QVg'
                 ];
                 const SPACE = '\u202F';
                 const _Beautify = Beautify;
@@ -132,6 +132,42 @@
                     document.body.appendChild(frame);
                 }
 
+                if (document.getElementById('popAllGCFrame')){
+                    const frame = document.createElement('div');
+                    frame.id = 'popAllGCFrame';
+                    frame.className = 'framed';
+
+                    frame.style.position = 'fixed';
+                    frame.style.left = '130px'; // place à droite du bouton wrinklers
+                    frame.style.bottom = '30px';
+                    frame.style.zIndex = '10000';
+
+                    frame.style.padding = '4px';
+                    frame.style.boxShadow = 'none';
+                    frame.style.backgroundClip = 'padding-box';
+
+                    const btn = document.createElement('div');
+                    btn.className = 'option titleFont';
+                    btn.textContent = 'Pop all GC';
+
+                    btn.style.whiteSpace = 'nowrap';
+                    btn.style.textAlign = 'center';
+                    btn.style.cursor = 'pointer'; // hover “main”
+
+                    btn.onclick = function () {
+                        let popped = false;
+                        Game.shimmer.forEach(s => {
+                            if (s.type === "golden" && !s.popped) {
+                                s.pop();
+                                popped = true;
+                            }
+                        });
+                        if (popped) PlaySound('snd/tick.mp3');
+                    };
+
+                    frame.appendChild(btn);
+                    document.body.appendChild(frame);
+                }
 
                 // Notification du plugin
                 if (typeof Game.Notify !== 'undefined') {
