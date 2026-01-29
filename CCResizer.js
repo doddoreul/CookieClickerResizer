@@ -14,7 +14,7 @@
         Game.registerMod("CC Resizer", {
             init: function() {
 
-                // --- CSS personnalisé ---
+                // --- Custom CSS ---
                 let styleEl = document.getElementById('customCSSPlugin');
                 if (!styleEl) {
                     styleEl = document.createElement('style');
@@ -35,7 +35,7 @@
                     #gardenPanel { width: 290px !important; }
                 `;
 
-                // --- Noms de produits raccourcis ---
+                // --- Building shortened names ---
                 const productNames = ['Crsr','Gma','Frm','Mine','Fctry','Bank','Tmpl','Wz T','Shpt','ALab','Prtl','TM','AC','Prsm','ChMk','FE','JS','Idle','CB','You'];
 
                 const updateNames = () => {
@@ -52,7 +52,7 @@
                     observer.observe(container, { childList: true, characterData: true, subtree: true });
                 }
 
-                // --- Beautify optimisé ---
+                // --- Shorten big numbers ---
                 const SUFFIXES = ['', 'K','M','B','T','Qa','Qi','Sx','Sp','Oc','No','De','UDe','DDe','TDe','QaDe','QiDe','SxDe','SpDe','ODe','NDe','Vi','UVi','DVi','TVi','QaVi','QiVi','SxVi'];
                 const POWERS = SUFFIXES.map((_, i) => Math.pow(10, i*3));
                 const SPACE = '\u202F';
@@ -84,7 +84,7 @@
                 Beautify = BeautifyAll = CMFormat;
                 Game.formatNumber = CMFormat;
 
-                // --- Boutons factorisés ---
+                // --- Bottom buttons ---
                 function createButton(id, text, left, onClick) {
                     if (document.getElementById(id)) return;
                     const frame = document.createElement('div');
@@ -110,11 +110,13 @@
                     document.body.appendChild(frame);
                 }
 
+                // Pop all wrinklers button
                 createButton('popAllWrinklersFrame', 'Pop all wrinklers', 6, () => {
                     Game.wrinklers.forEach(w => w.hp > 0 && (w.hp = 0));
                     Game.UpdateWrinklers();
                 });
 
+                // Pop all GC button
                 createButton('popAllGCFrame', 'Pop all GC', 130, () => {
                     let popped = false;
                     Game.shimmer.forEach(s => {
@@ -122,7 +124,44 @@
                     });
                     if (popped) PlaySound('snd/tick.mp3');
                 });
+                
+                // --- Spacebar autoclick (10 clicks/sec) ---
+                let spaceHeld = false;
+                let clickInterval = null;
+            
+                function startClicking() {
+                    if (clickInterval) return;
+                    clickInterval = setInterval(() => {
+                        if (Game && Game.ClickCookie) {
+                            Game.ClickCookie();
+                        }
+                    }, 100); // 10x/sec
+                }
+            
+                function stopClicking() {
+                    if (clickInterval) {
+                        clearInterval(clickInterval);
+                        clickInterval = null;
+                    }
+                }
+            
+                document.addEventListener('keydown', (e) => {
+                    if (e.code === 'Space' && !spaceHeld) {
+                        spaceHeld = true;
+                        startClicking();
+                        e.preventDefault(); // empêche le scroll
+                    }
+                });
+            
+                document.addEventListener('keyup', (e) => {
+                    if (e.code === 'Space') {
+                        spaceHeld = false;
+                        stopClicking();
+                        e.preventDefault();
+                    }
+                });
 
+                
                 // Notification
                 if (Game.Notify) Game.Notify('CC Resizer loaded!', '', [16,5], 3);
                 console.log('CC Resizer initialized successfully');
