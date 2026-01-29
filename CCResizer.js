@@ -164,7 +164,13 @@
                         e.preventDefault();
                     }
                 }, { passive: false });
-
+                
+                // Prevent bulk-buy partial
+                Game.ClickProduct=function(what){ 
+                    if ( Game.ObjectsById[what].bulkPrice <= Game.cookies || Game.buyMode === -1) { 
+                        Game.ObjectsById[what].buy(); 
+                    }
+                }
                 // =====================
                 // Notify
                 // =====================
