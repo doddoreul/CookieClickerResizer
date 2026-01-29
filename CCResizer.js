@@ -58,17 +58,28 @@
                 const SPACE = '\u202F';
                 const _Beautify = Beautify;
 
-                function CMFormat(value, floats=2, forced=false) {
+                function CMFormat(value, floats = 2, forced = false) {
                     if (!isFinite(value)) return value === Infinity ? '∞' : '0';
-                    if (!forced && Math.abs(value) < 1000) return _Beautify(value, floats, forced);
-                    let abs = Math.abs(value);
-                    let tier = POWERS.findIndex(p => abs < p*1000) - 1;
-                    if (tier < 1) return _Beautify(value, floats, forced);
-                    tier = Math.min(tier, SUFFIXES.length - 1);
-                    let scaled = value / POWERS[tier];
-                    let out = scaled >= 100 ? scaled.toFixed(0) : scaled >= 10 ? scaled.toFixed(1) : scaled.toFixed(2);
+                
+                    const abs = Math.abs(value);
+                    if (!forced && abs < 1000) return _Beautify(value, floats, forced);
+                
+                    // tier fiable : 1000^tier
+                    let tier = Math.floor(Math.log(abs) / Math.log(1000));
+                
+                    if (tier <= 0) return _Beautify(value, floats, forced);
+                    if (tier >= SUFFIXES.length) return value.toExponential(2);
+                
+                    const scaled = value / POWERS[tier];
+                
+                    let out;
+                    if (scaled >= 100) out = scaled.toFixed(0);
+                    else if (scaled >= 10) out = scaled.toFixed(1);
+                    else out = scaled.toFixed(2);
+                
                     return out + SPACE + SUFFIXES[tier];
                 }
+
 
                 Beautify = BeautifyAll = CMFormat;
                 Game.formatNumber = CMFormat;
