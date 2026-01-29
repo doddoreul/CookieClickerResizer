@@ -54,9 +54,11 @@
                         }
                     }
                 };
-
+                
                 updateNames();
-                Game.customLogicHooks.push(updateNames); // ← appelé seulement quand le jeu update
+                
+                // refresh très léger (2x/sec)
+                setInterval(updateNames, 500);
 
                 // =====================
                 // Number formatting (fast + safe)
