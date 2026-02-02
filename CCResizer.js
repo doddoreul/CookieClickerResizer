@@ -175,6 +175,9 @@
                 // =====================
                 Game.Notify?.('CC Resizer loaded!', '', [16, 5], 3);
                 console.log('CC Resizer fully optimized');
+
+                // Disable notifications
+                Game.Notify = function () {};
             },
 
             save: () => '',
