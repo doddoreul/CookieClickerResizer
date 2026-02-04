@@ -124,17 +124,24 @@
                     Game.UpdateWrinklers();
                 });
 
-                createButton('popAllGCFrame', 'Pop all GC', 130, () => {
+                createButton('popAllGCFrame', 'Pop all GC', 130, function () {
                     let popped = false;
-                    if (!Game || !Game.shimmer) return;
-                    Game.shimmer.forEach(s => {
+                
+                    if (!Game || !Game.shimmers) return;
+                
+                    for (let i in Game.shimmers) {
+                        const s = Game.shimmers[i];
+                        if (!s) continue;
+                
                         if (s.type === 'golden' && !s.popped) {
                             s.pop();
                             popped = true;
                         }
-                    });
+                    }
+                
                     if (popped) PlaySound('snd/tick.mp3');
                 });
+
 
                 // =====================
                 // Spacebar autoclick (10 CPS, zero spam)
