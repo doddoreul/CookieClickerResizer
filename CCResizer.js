@@ -126,6 +126,7 @@
 
                 createButton('popAllGCFrame', 'Pop all GC', 130, () => {
                     let popped = false;
+                    if (!Game || !Game.shimmer) return;
                     Game.shimmer.forEach(s => {
                         if (s.type === 'golden' && !s.popped) {
                             s.pop();
