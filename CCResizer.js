@@ -141,7 +141,42 @@
                 
                     if (popped) PlaySound('snd/tick.mp3');
                 });
-
+                
+                // =====================
+                // Reindeer button (Christmas only)
+                // =====================
+                const updateReindeerButton = () => {
+                    const id = 'popReindeerFrame';
+                    const isChristmas = Game.season === 'christmas';
+                    const existing = document.getElementById(id);
+                
+                    if (isChristmas && !existing) {
+                        createButton(id, 'Pop reindeer', 254, popReindeer);
+                    }
+                    else if (!isChristmas && existing) {
+                        existing.remove();
+                    }
+                };
+                
+                // check léger (2x/sec)
+                setInterval(updateReindeerButton, 500);
+                
+                function popReindeer() {
+                    let popped = false;
+                    if (!Game || !Game.shimmers) return;
+                
+                    for (let i in Game.shimmers) {
+                        const s = Game.shimmers[i];
+                        if (!s) continue;
+                
+                        if (s.type === 'reindeer' && !s.popped) {
+                            s.pop();
+                            popped = true;
+                        }
+                    }
+                
+                    if (popped) PlaySound('snd/tick.mp3');
+                }
 
                 // =====================
                 // Spacebar autoclick (10 CPS, zero spam)
